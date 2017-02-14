@@ -8,17 +8,10 @@ var socketIO = require('socket.io');
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
   fileServer.serve(req, res);
-}).listen(443);
+}).listen(8080);
 
 var io = socketIO.listen(app);
-io.set("origins = *");
-io.set('transports', [
-    'websocket'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'xhr-polling'
-    , 'jsonp-polling'
-]);
+io.set('origins', '*:*');
 io.sockets.on('connection', function(socket) {
 
   // convenience function to log server messages on the client
