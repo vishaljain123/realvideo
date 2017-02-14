@@ -4,17 +4,21 @@ var os = require('os');
 var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
-var cors=require('cors');
 
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
-
-   res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   fileServer.serve(req, res);
 }).listen(8080);
 
 var io = socketIO.listen(app);
+io.set("origins = *");
+io.set('transports', [
+    'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+]);
 io.sockets.on('connection', function(socket) {
 
   // convenience function to log server messages on the client
