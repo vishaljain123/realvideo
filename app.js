@@ -11,7 +11,7 @@ var app = http.createServer(function(req, res) {
 }).listen(8080);
 
 var io = socketIO.listen(app);
-io.set('origins', '*:*');
+io.set('origins', 'http://ec2-52-33-224-171.us-west-2.compute.amazonaws.com:8080/');
 io.sockets.on('connection', function(socket) {
 
   // convenience function to log server messages on the client
