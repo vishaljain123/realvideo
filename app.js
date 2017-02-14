@@ -4,19 +4,15 @@ var os = require('os');
 var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
-
-var express = require('express');
-var cors = require('cors');
-
-
-
-
+var cors=require('cors');
 
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
+
+   res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   fileServer.serve(req, res);
 }).listen(8080);
-app.use(cors()); 
 
 var io = socketIO.listen(app);
 io.sockets.on('connection', function(socket) {
