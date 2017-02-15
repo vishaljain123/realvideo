@@ -8,10 +8,10 @@ var socketIO = require('socket.io');
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
   fileServer.serve(req, res);
-}).listen(8080);
+}).listen(443);
 
 var io = socketIO.listen(app);
-io.set('origins', 'ec2-52-33-224-171.us-west-2.compute.amazonaws.com:8080/');
+io.set('origins', 'https://ec2-52-33-224-171.us-west-2.compute.amazonaws.com:8080/');
 io.sockets.on('connection', function(socket) {
 
   // convenience function to log server messages on the client
